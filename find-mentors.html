@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Mentors - MentorMatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-green: rgb(78, 24, 99);
+            --accent-green: rgb(179, 89, 214);
+            --text-white: #ffffff;
+            --orange-accent: #ff8a65;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .filter-sidebar {
+            background: #fff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .filter-sidebar:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .mentor-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .skill-badge {
+            background-color: var(--accent-green);
+            color: var(--primary-green);
+            font-size: 0.85rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            margin: 0.25rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            background-color: var(--primary-green);
+            color: var(--text-white);
+        }
+
+        .availability-badge {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .availability-badge:hover {
+            background-color: #2e7d32;
+            color: #e8f5e9;
+        }
+
+        .rating-stars {
+            color: #ffd700;
+        }
+
+        .search-bar {
+            border: 2px solid var(--primary-green);
+            border-radius: 2rem;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 0.2rem rgba(78, 24, 99, 0.25);
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group h6 {
+            color: var(--primary-green);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .btn-outline {
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-green);
+            color: var(--text-white);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .pagination .page-link {
+            color: var(--primary-green);
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .filter-sidebar {
+            animation: slideInFromLeft 0.5s ease-out;
+        }
+
+        .mentor-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .skill-badge {
+            animation: fadeIn 0.5s ease-out;
+            animation-delay: 0.2s;
+            animation-fill-mode: backwards;
+        }
+
+        .availability-badge {
+            animation: slideInFromRight 0.5s ease-out;
+            animation-delay: 0.3s;
+            animation-fill-mode: backwards;
+        }
+
+        @media (max-width: 768px) {
+            .filter-sidebar {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+ <!-- Navbar -->
+ <nav class="navbar">
+    <a href="index (2).html" class="logo">
+        <span class="logo-text-up">MENTOR</span>
+        <span>-</span>
+        <span class="logo-text-start">MATCH</span>
+    </a>
+    
+    <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="messages.html" class="nav-link">Messages</a>
+        <a href="meetings.html" class="nav-link">Meetings</a>
+        <div class="dropdown">
+            <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown">
+                <i class="bi bi-bell"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">New message from mentor</a></li>
+                <li><a class="dropdown-item" href="#">Upcoming meeting reminder</a></li>
+            </ul>
+        </div>
+        <div class="dropdown ms-3">
+            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown">
+                <img src="assets/profile-placeholder.jpg" class="rounded-circle me-2" width="32" height="32" alt="Profile">
+                <span>Sanika</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="mentee-profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="settings.html">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="index.html">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="row">
+        <!-- Filter Sidebar -->
+        <div class="col-lg-3">
+            <div class="filter-sidebar">
+                <h5 class="mb-4">Find Mentors</h5>
+                
+                <!-- Search -->
+                <div class="filter-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-bar" placeholder="Search mentors...">
+                    </div>
+                </div>
+
+                <!-- Skills Filter -->
+                <div class="filter-group">
+                    <h6>Skills</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="skill1">
+                        <label class="form-check-label" for="skill1">Web Development</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="skill2">
+                        <label class="form-check-label" for="skill2">Data Science</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="skill3">
+                        <label class="form-check-label" for="skill3">UI/UX Design</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="skill4">
+                        <label class="form-check-label" for="skill4">Machine Learning</label>
+                    </div>
+                </div>
+
+                <!-- Experience Level -->
+                <div class="filter-group">
+                    <h6>Experience Level</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="experience" id="exp1">
+                        <label class="form-check-label" for="exp1">1-3 years</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="experience" id="exp2">
+                        <label class="form-check-label" for="exp2">3-5 years</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="experience" id="exp3">
+                        <label class="form-check-label" for="exp3">5+ years</label>
+                    </div>
+                </div>
+
+                <!-- Availability -->
+                <div class="filter-group">
+                    <h6>Availability</h6>
+                    <select class="form-select">
+                        <option>Any Time</option>
+                        <option>Weekdays</option>
+                        <option>Weekends</option>
+                        <option>Morning</option>
+                        <option>Evening</option>
+                    </select>
+                </div>
+
+                
+                <!-- Clear Filters -->
+                <button class="btn btn-outline w-100 mt-3">Clear Filters</button>
+            </div>
+        </div>
+
+        <!-- Mentor Cards -->
+        <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5>Found 2 mentors</h5>
+                <select class="form-select" style="width: auto;">
+                    <option>Sort by: Recommended</option>
+                    <option>Rating: High to Low</option>
+                    <option>Experience: High to Low</option>
+                    <option>Availability</option>
+                </select>
+            </div>
+
+            <div class="row g-4">
+                <!-- Mentor Card 1 -->
+                <div class="col-md-6" data-location="North America">
+                    <div class="card mentor-card h-100">
+                        <div class="card-body">
+                            <div class="justify-content-between align-items-center"><center>
+                                <img src="mentor_img.webp"  width="270" height="220" alt="Mentor">
+                            </center>
+                                <div>
+                                   
+                                    <h5 class="card-title mb-1">Rahul Kumar</h5>
+                                    <p class="card-subtitle text-muted">Senior Web Developer</p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="skill-badge">JavaScript</span>
+                                <span class="skill-badge">React</span>
+                                <span class="skill-badge">Node.js</span>
+                            </div>
+                            <p class="card-text">10+ years of experience in full-stack web development. Passionate about helping others learn and grow in their tech careers.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="rating-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <span class="ms-2 text-muted">(4.5)</span>
+                                </div>
+                                <span class="availability-badge">
+                                    <i class="bi bi-clock me-1"></i>Available
+                                </span>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3">Request Mentorship</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card mentor-card h-100">
+                        <div class="card-body">
+                            <div class="justify-content-between align-items-center"><center>
+                                <img src="mentor_img1.jpg"  width="270" height="220" alt="Mentor">
+                            </center>
+                                <div>
+                                   
+                                    <h5 class="card-title mb-1">mrs deshmukh</h5>
+                                    <p class="card-subtitle text-muted">Senior data analyst</p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <span class="skill-badge">Data analysis</span>
+                                <span class="skill-badge">Data modelling</span>
+                                <span class="skill-badge">python</span>
+                            </div>
+                            <p class="card-text">10+ years of experience in data analysis. Passionate about helping others learn and grow in their tech careers.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="rating-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <span class="ms-2 text-muted">(4.5)</span>
+                                </div>
+                                <span class="availability-badge">
+                                    <i class="bi bi-clock me-1"></i>Available
+                                </span>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3">Request Mentorship</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More mentor cards can be added here -->
+            </div>
+
+            <!-- Pagination -->
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Function to filter mentors based on selected criteria and search query
+function filterMentors() {
+    const skillCheckboxes = document.querySelectorAll('.form-check-input[type="checkbox"]');
+    const experienceRadios = document.querySelectorAll('.form-check-input[type="radio"]');
+    const availabilitySelect = document.querySelector('.filter-group select:nth-of-type(1)');
+    const locationSelect = document.querySelector('.filter-group select:nth-of-type(2)');
+    const searchInput = document.querySelector('.search-bar');
+    
+    // Get selected skills
+    const selectedSkills = Array.from(skillCheckboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.nextElementSibling.textContent.toLowerCase());
+
+    // Get selected experience level
+    const selectedExperience = Array.from(experienceRadios)
+        .find(radio => radio.checked)?.nextElementSibling.textContent;
+
+    // Get selected availability and location
+    const selectedAvailability = availabilitySelect.value;
+    const selectedLocation = locationSelect.value;
+
+    // Get search query
+    const searchQuery = searchInput.value.toLowerCase();
+
+    // Logic to filter mentor cards based on selected criteria and search query
+    const mentorCards = document.querySelectorAll('.mentor-card');
+    let visibleCount = 0;
+
+    mentorCards.forEach(card => {
+        const skills = Array.from(card.querySelectorAll('.skill-badge')).map(badge => badge.textContent.toLowerCase());
+        const experience = card.querySelector('.card-subtitle').textContent.toLowerCase();
+        const availability = card.querySelector('.availability-badge').textContent.toLowerCase();
+        const location = card.closest('[data-location]').dataset.location;
+        const mentorName = card.querySelector('.card-title').textContent.toLowerCase();
+        const mentorDescription = card.querySelector('.card-text').textContent.toLowerCase();
+
+        const isSkillMatch = selectedSkills.length === 0 || selectedSkills.some(skill => skills.includes(skill));
+        const isExperienceMatch = !selectedExperience || experience.includes(selectedExperience.toLowerCase());
+        const isAvailabilityMatch = selectedAvailability === "Any Time" || availability.includes(selectedAvailability.toLowerCase());
+        const isLocationMatch = selectedLocation === "Worldwide" || location === selectedLocation;
+        const isSearchMatch = searchQuery === '' || 
+                              mentorName.includes(searchQuery) || 
+                              mentorDescription.includes(searchQuery) ||
+                              skills.some(skill => skill.includes(searchQuery));
+
+        // Show or hide card based on matches
+        if (isSkillMatch && isExperienceMatch && isAvailabilityMatch && isLocationMatch && isSearchMatch) {
+            card.style.display = '';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    // Update the mentor count
+    document.querySelector('h5').textContent = `Found ${visibleCount} mentor${visibleCount !== 1 ? 's' : ''}`;
+}
+
+// Event listeners for filters
+document.querySelectorAll('.form-check-input, .form-select').forEach(input => {
+    input.addEventListener('change', filterMentors);
+});
+
+// Event listener for search input
+document.querySelector('.search-bar').addEventListener('input', filterMentors);
+
+// Clear Filters functionality
+document.querySelector('.btn-outline').addEventListener('click', () => {
+    document.querySelectorAll('.form-check-input').forEach(input => input.checked = false);
+    document.querySelectorAll('.form-select').forEach(select => select.selectedIndex = 0);
+    document.querySelector('.search-bar').value = '';
+    filterMentors(); // Reset filter
+});
+
+// Initial filter on page load
+filterMentors();
+
+// Sort functionality
+document.querySelector('select[class="form-select"]').addEventListener('change', function() {
+    const sortBy = this.value;
+    const mentorContainer = document.querySelector('.row.g-4');
+    const mentorCards = Array.from(mentorContainer.querySelectorAll('.col-md-6'));
+
+    mentorCards.sort((a, b) => {
+        if (sortBy === 'Rating: High to Low') {
+            const ratingA = parseFloat(a.querySelector('.rating-stars .text-muted').textContent.slice(1, -1));
+            const ratingB = parseFloat(b.querySelector('.rating-stars .text-muted').textContent.slice(1, -1));
+            return ratingB - ratingA;
+        } else if (sortBy === 'Experience: High to Low') {
+            const expA = parseInt(a.querySelector('.card-text').textContent.match(/\d+/)[0]);
+            const expB = parseInt(b.querySelector('.card-text').textContent.match(/\d+/)[0]);
+            return expB - expA;
+        } else if (sortBy === 'Availability') {
+            const availA = a.querySelector('.availability-badge').textContent;
+            const availB = b.querySelector('.availability-badge').textContent;
+            return availA.localeCompare(availB);
+        }
+        // For 'Recommended' or any other option, keep the original order
+        return 0;
+    });
+
+    mentorCards.forEach(card => mentorContainer.appendChild(card));
+});
+</script>
+</body>
+</html>

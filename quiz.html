@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mentoring Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, rgb(179, 89, 214) , lavender );
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .question {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            background: white;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover {
+            transform: translateX(10px);
+            border-color: rgb(78, 24, 99);
+        }
+
+        .option-btn.selected {
+            background:rgb(78, 24, 99);
+            color: white;
+            border-color:rgb(78, 24, 99);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .score-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .score-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .feedback {
+            color: #6B73FF;
+            font-size: 1.1rem;
+            margin: 20px 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            background:rgb(78, 24, 99);
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 115, 255, 0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                margin: 20px;
+            }
+            .question-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div id="quiz">
+            <!-- Questions will be inserted here -->
+        </div>
+
+        <div class="nav-buttons">
+            <button id="prevBtn" class="nav-btn" style="display: none;">Previous</button>
+            <button id="nextBtn" class="nav-btn">Next</button>
+        </div>
+
+        <div class="score-section" id="scoreSection">
+            <h2>Quiz Completed! 🎉</h2>
+            <div class="feedback" id="feedback"></div>
+            <button class="nav-btn" onclick="restartQuiz()">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What do you believe is the most valuable aspect of mentoring?",
+                options: [
+                    "Personal growth and self-discovery",
+                    "Professional networking opportunities",
+                    "Academic guidance and support",
+                    "Career development and planning"
+                ]
+            },
+            {
+                question: "Which quality in a mentor would resonate most with you?",
+                options: [
+                    "Someone who listens and understands",
+                    "Someone who challenges and pushes me",
+                    "Someone who shares their experiences",
+                    "Someone who provides practical advice"
+                ]
+            },
+            {
+                question: "What motivates you to seek mentoring?",
+                options: [
+                    "Desire for personal development",
+                    "Career advancement goals",
+                    "Need for guidance and support",
+                    "Interest in learning from others' experiences"
+                ]
+            },
+            {
+                question: "How do you best learn from others?",
+                options: [
+                    "Through one-on-one conversations",
+                    "By observing their actions",
+                    "Through shared experiences",
+                    "By receiving direct feedback"
+                ]
+            },
+            {
+                question: "What type of relationship building approach appeals to you most?",
+                options: [
+                    "Regular informal conversations",
+                    "Structured goal-setting sessions",
+                    "Collaborative project work",
+                    "Social and networking events"
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            const quizDiv = document.getElementById('quiz');
+            
+            const questionHTML = `
+                <div class="question-card">
+                    <h3 class="question">${question.question}</h3>
+                    ${question.options.map((option, index) => `
+                        <button class="option-btn ${answers[currentQuestion] === index ? 'selected' : ''}" 
+                                onclick="selectOption(${index})">
+                            ${option}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+            
+            quizDiv.innerHTML = questionHTML;
+            updateProgress();
+            updateNavButtons();
+        }
+
+        function selectOption(index) {
+            answers[currentQuestion] = index;
+            displayQuestion();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'block' : 'none';
+            document.getElementById('nextBtn').textContent = 
+                currentQuestion === questions.length - 1 ? 'Finish' : 'Next';
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (answers[currentQuestion] === undefined) {
+                alert('Please select an option before proceeding.');
+                return;
+            }
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function showResults() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('prevBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+            
+            const scoreSection = document.getElementById('scoreSection');
+            scoreSection.style.display = 'block';
+            
+            const feedback = document.getElementById('feedback');
+            feedback.innerHTML = generateFeedback();
+        }
+
+        function generateFeedback() {
+            return `Thank you for completing the quiz! Your responses will help create a more personalized mentoring experience tailored to your preferences and learning style.`;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('scoreSection').style.display = 'none';
+            displayQuestion();
+        }
+
+        // Initialize quiz
+        displayQuestion();
+    </script>
+</body>
+</html>

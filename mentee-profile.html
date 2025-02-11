@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorMatch - Mentee Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <span class="logo-text-up">MENTOR</span>
+            <span>-</span>
+            <span class="logo-text-start">MATCH</span>
+        </a>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                3
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
+                            <li><a class="dropdown-item" href="#">New message from mentor</a></li>
+                            <li><a class="dropdown-item" href="#">Upcoming meeting in 1 hour</a></li>
+                            <li><a class="dropdown-item" href="#">Goal deadline approaching</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown">
+                            <img src="assets/profile-placeholder.jpg" class="rounded-circle me-2" width="32" height="32">
+                            <span class="d-none d-md-block">Sanika</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item active" href="mentee-profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="#settings">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="home.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="decoration-circle decoration-circle-1"></div>
+    <div class="decoration-circle decoration-circle-2"></div>
+
+    <div class="container mt-1 pt-1">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Profile Card -->
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="position-relative mb-3">
+                            <img src="assets/profile-placeholder.jpg" class="rounded-circle img-thumbnail" width="150">
+                            <button class="btn btn-sm btn-primary position-absolute bottom-0 end-0" id="changePhotoBtn">
+                                <i class="bi bi-camera"></i>
+                            </button>
+                        </div>
+                        <h4 class="card-title" id="profileName">Jane Smith</h4>
+                        <p class="text-muted" id="profileRole">Mentee</p>
+                        <div class="d-grid">
+                            <button class="btn btn-outline mb-2" style="color: rgb(78, 24, 99) !important;" id="editProfileBtn">
+                                <i class="bi bi-pencil"></i> Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Contact Information</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="bi bi-envelope text-primary"></i>
+                                <span id="profileEmail">jane.smith@example.com</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-phone text-primary"></i>
+                                <span id="profilePhone">+1 234 567 890</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-geo-alt text-primary"></i>
+                                <span id="profileLocation">San Francisco, USA</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Current Mentor -->
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Current Mentor</h5>
+                        <div class="d-flex align-items-center">
+                            <img src="assets/mentor-placeholder.jpg" class="rounded-circle me-2" width="40">
+                            <div>
+                                <h6 class="mb-0" id="mentorName">Rahul Kumar</h6>
+                                <small class="text-muted" id="mentorExpertise">Web Development</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <!-- Learning Goals -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Learning Goals</h5>
+                        <div class="mb-3">
+                            <h6>Primary Focus Area</h6>
+                            <p id="profileFocusArea">Web Development</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Current Goals</h6>
+                            <ul id="profileGoals">
+                                <li>Master React.js fundamentals</li>
+                                <li>Build a portfolio website</li>
+                                <li>Learn Node.js backend development</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Experience Level</h6>
+                            <p id="profileExperience">Beginner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Tracking -->
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Learning Progress</h5>
+                        <div class="mb-3">
+                            <h6>Current Progress</h6>
+                            <div class="progress">
+                                <div class="progress-bar" id="profileProgress" role="progressbar" style="width: 45%">45%</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Completed Milestones</h6>
+                            <div id="profileMilestones">
+                                <span class="badge bg-success me-2">HTML Basics</span>
+                                <span class="badge bg-success me-2">CSS Fundamentals</span>
+                                <span class="badge bg-success">JavaScript Basics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferences -->
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Learning Preferences</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Availability</h6>
+                                <p id="profileAvailability">Weekday Evenings, Weekends</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Preferred Learning Style</h6>
+                                <p id="profileLearningStyle">Visual, Hands-on Projects</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-control" name="phone">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Location</label>
+                                <input type="text" class="form-control" name="location">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Primary Focus Area</label>
+                            <select class="form-select" name="focusArea">
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile Development">Mobile Development</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Learning Goals (one per line)</label>
+                            <textarea class="form-control" name="goals" rows="3"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Experience Level</label>
+                                <select class="form-select" name="experience">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Learning Style</label>
+                                <input type="text" class="form-control" name="learningStyle">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Availability</label>
+                            <input type="text" class="form-control" name="availability">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/mentee-profile.js"></script>
+    <script src="dynamic-functionality.js"></script>
+</body>
+</html> 

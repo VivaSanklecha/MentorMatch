@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MentorMatch</title>
+  <link rel="stylesheet" href="first.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>MentorMatch</h1>
+      <p>Find the right mentor or mentee to achieve your goals!</p>
+    </div>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+      <input type="checkbox" id="dark-mode" />
+      <label for="dark-mode">🌙</label>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Role Selection Section -->
+    <section class="role-selection">
+      <h2>Select Your Role</h2>
+      <div class="role-buttons">
+        <button class="btn" id="mentor-btn">I am a Mentor</button>
+        <button class="btn" id="mentee-btn">I am a Mentee</button>
+      </div>
+    </section>
+
+    <!-- Mentor Profile Form -->
+    <section id="mentor-profile" class="profile-form" style="display: none;">
+      <h2>Mentor Profile</h2>
+      <form>
+        <div class="input-group">
+          <label for="mentor-name">Name:</label>
+          <input type="text" id="mentor-name" placeholder="Enter your name">
+        </div>
+
+        <div class="input-group">
+          <label for="mentor-skills">Skills:</label>
+          <input type="text" id="mentor-skills" placeholder="What skills do you offer?">
+        </div>
+
+        <div class="input-group">
+          <label for="mentor-experience">Experience:</label>
+          <input type="text" id="mentor-experience" placeholder="Your years of experience">
+        </div>
+
+        <div class="input-group">
+          <label for="mentor-availability">Availability:</label>
+          <input type="text" id="mentor-availability" placeholder="When are you available?">
+        </div>
+
+        <button type="submit" class="btn">Save Profile</button>
+      </form>
+    </section>
+
+    <!-- Mentee Profile Form -->
+    <section id="mentee-profile" class="profile-form" style="display: none;">
+      <h2>Mentee Profile</h2>
+      <form>
+        <div class="input-group">
+          <label for="mentee-name">Name:</label>
+          <input type="text" id="mentee-name" placeholder="Enter your name">
+        </div>
+
+        <div class="input-group">
+          <label for="mentee-goals">Goals:</label>
+          <input type="text" id="mentee-goals" placeholder="What are your goals?">
+        </div>
+
+        <div class="input-group">
+          <label for="mentee-skills">Skills:</label>
+          <input type="text" id="mentee-skills" placeholder="What skills do you want to develop?">
+        </div>
+
+        <div class="input-group">
+          <label for="mentee-preferences">Preferences:</label>
+          <input type="text" id="mentee-preferences" placeholder="Preferred mentor's skills or availability">
+        </div>
+
+        <button type="submit" class="btn">Save Profile</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 MentorMatch. Crafted with ❤️ for learners.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

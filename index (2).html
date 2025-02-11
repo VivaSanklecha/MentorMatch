@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorMatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Navigation animations */
+        :root {
+            --primary-purple:white;
+          }
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #ff8a65;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Logo animation */
+.logo-text-up, .logo-text-start {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover .logo-text-up {
+    transform: translateY(-2px);
+}
+
+.logo:hover .logo-text-start {
+    transform: translateY(2px);
+}
+
+/* Hero content animations */
+.hero-content {
+    animation: fadeIn 1s ease-out;
+}
+
+.hero-title {
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.hero-description {
+    animation: slideUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.hero-buttons {
+    animation: slideUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Button hover effects */
+.btn {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn.btn-outline[href="signup.html"]:last-of-type {
+    border: 2px solid var(--primary-purple) !important;
+    color: var(--primary-purple) !important;
+    background: transparent !important;
+  }
+  
+  .btn.btn-outline[href="signup.html"]:last-of-type:hover {
+    background: var(--primary-purple) !important;
+    color: rgb(78, 24, 99) !important;
+  }
+  
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index (2).html" class="logo">
+            <span class="logo-text-up">MENTOR</span>
+            <span>-</span>
+            <span class="logo-text-start">MATCH</span>
+        </a>
+        
+        <div class="nav-links">
+            <a href="#how-it-works" class="nav-link">How it works</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="login.html" class="btn btn-outline">Log in</a>
+            <a href="signup.html" class="btn btn-primary">Sign up</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="geometric-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2 class="hero-subtitle">MENTOR MATCH</h2>
+                <h1 class="hero-title">
+                    Find your perfect mentor match!
+                </h1>
+                <p class="hero-description">
+                   Connect with experienced professionals who can guide you towards your career goals!
+                </p>
+                <div class="hero-buttons">
+                    <a href="signup.html" class="btn btn-accent">Join as faculty</a>
+                    <a href="signup.html" class="btn btn-outline">Join as student</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img 
+                    src="23790665.jpg"
+                    alt="Mentorship illustration"
+                    width="350"
+                    height="250"
+                />
+            </div>
+        </div>
+    </main>
+
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Faculty Mentorship Benefits</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 hover-lift">
+                        <div class="card-body">
+                            <div class="feature-icon mb-3 bg-primary-soft rounded-circle p-3 d-inline-block">
+                                <i class="bi bi-book-half text-primary fs-4"></i>
+                            </div>
+                            <h5 class="card-title">Academic Excellence</h5>
+                            <ul class="card-text list-unstyled">
+                                <li class="mb-2">✓ Subject matter expertise</li>
+                                <li class="mb-2">✓ Doubt resolution sessions</li>
+                                <li class="mb-2">✓ Study material guidance</li>
+                                <li>✓ Exam preparation tips</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 hover-lift">
+                        <div class="card-body">
+                            <div class="feature-icon mb-3 bg-success-soft rounded-circle p-3 d-inline-block">
+                                <i class="bi bi-journal-text text-success fs-4"></i>
+                            </div>
+                            <h5 class="card-title">Research & Projects</h5>
+                            <ul class="card-text list-unstyled">
+                                <li class="mb-2">✓ Research methodology</li>
+                                <li class="mb-2">✓ Project supervision</li>
+                                <li class="mb-2">✓ Lab work guidance</li>
+                                <li>✓ Paper publication support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 hover-lift">
+                        <div class="card-body">
+                            <div class="feature-icon mb-3 bg-info-soft rounded-circle p-3 d-inline-block">
+                                <i class="bi bi-graph-up text-info fs-4"></i>
+                            </div>
+                            <h5 class="card-title">Career Guidance</h5>
+                            <ul class="card-text list-unstyled">
+                                <li class="mb-2">✓ Higher education advice</li>
+                                <li class="mb-2">✓ Industry connections</li>
+                                <li class="mb-2">✓ Career path planning</li>
+                                <li>✓ Professional development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">How It Works</h2>
+            <div class="row">
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center">
+                        <div class="step-number mb-3">1</div>
+                        <h5>Sign Up</h5>
+                        <p>Create your profile and tell us about your goals</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center">
+                        <div class="step-number mb-3">2</div>
+                        <h5>Get Matched</h5>
+                        <p>Our algorithm finds your perfect mentor match</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center">
+                        <div class="step-number mb-3">3</div>
+                        <h5>Connect</h5>
+                        <p>Schedule sessions and start learning</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-center">
+                        <div class="step-number mb-3">4</div>
+                        <h5>Grow</h5>
+                        <p>Track progress and achieve your goals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4" data-aos="fade-up">Ready to Start Your Journey?</h2>
+            <a href="quiz.html" class="btn btn-accent">Get Started Now</a>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>MentorMatch</h5>
+                    <p>Connecting mentors and mentees for success.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li>Email: info@mentormatch.com</li>
+                        <li>Phone: 020-24230939</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init();
+        });
+    </script>
+</body>
+</html>
+
