@@ -26,36 +26,3 @@
 8. **Notification Module** – Sends alerts and reminders. 🔔📩📅
 9. **Admin Management Module** – Provides administrative control over the platform. 🛠️👨‍💻📊
 
-## Technology Stack
-- **Frontend:** HTML, CSS, JavaScript, Bootstrap
-- **Backend:** Java (Spring Boot)
-- **Database:** MySQL (User and mentorship-related data storage)
-- **Real-time Communication:** WebSocket for chat functionality
-- **Video Call Integration:** Third-party APIs (e.g., Zoom, Google Meet)
-- **Deployment:** GitHub 🚀🖥️📦
-
-## Installation & Setup
-1. Clone the repository: 🔄📥🖥️
-   ```sh
-   git clone https://github.com/your-repo/mentormatch.git
-   ```
-2. Navigate to the project directory: 📂📌🚀
-   ```sh
-   cd mentormatch
-   ```
-3. Install dependencies: ⚙️📦🔽
-   ```sh
-   npm install  # If using Node.js for frontend
-   ```
-4. Set up the database: 🗄️⚙️📊
-   - Configure MySQL database.
-   - Run the provided SQL schema.
-5. Start the backend server: 🚀☕⚙️
-   ```sh
-   mvn spring-boot:run
-   ```
-6. Start the frontend: 🎨🌐⚡
-   ```sh
-   npm start
-   ```
-
